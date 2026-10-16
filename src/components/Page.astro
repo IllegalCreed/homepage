@@ -1,0 +1,296 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import External from './External.astro';
+import type { Copy } from '../content';
+import typePal from '../assets/projects/type-pal.png';
+import algorithms from '../assets/projects/algorithms.png';
+import llmSanguo from '../assets/projects/llm-sanguo.png';
+
+interface Props {
+  copy: Copy;
+}
+
+const { copy } = Astro.props;
+const images = {
+  'type-pal': typePal,
+  algorithms,
+  'llm-sanguo': llmSanguo,
+} as const;
+
+const year = 2026;
+
+function isExternal(href: string) {
+  return href.startsWith('http');
+}
+---
+
+<Base copy={copy}>
+  <a class="skip" href="#content">{copy.skip}</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="mark" href={copy.home}>
+        <span class="seal" aria-hidden="true">旭</span>
+        <span>{copy.mark}</span>
+      </a>
+      <nav class="nav" aria-label={copy.locale === 'zh' ? '页内' : 'On this page'}>
+        {
+          copy.nav.map((item) => (
+            <a href={item.href}>{item.label}</a>
+          ))
+        }
+      </nav>
+      <div class="tools">
+        <a href={copy.otherLocale.href} hreflang={copy.otherLocale.lang} lang={copy.otherLocale.lang}>
+          {copy.otherLocale.label}
+        </a>
+        <button
+          type="button"
+          data-theme-toggle
+          data-label-dark={copy.themeToDark}
+          data-label-light={copy.themeToLight}
+          aria-pressed="false"
+          aria-label={copy.themeToDark}
+        >
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
+            <path
+              d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"></path>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M15.5 3.5a8.2 8.2 0 1 0 5 12.2A7.2 7.2 0 0 1 15.5 3.5Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">{copy.kicker}</p>
+        <h1>{copy.mark}</h1>
+        <p class="roman" lang={copy.locale === 'en' ? 'zh-Hans' : 'en'}>{copy.roman}</p>
+        <p class="lede">{copy.lede}</p>
+        <ul class="facts">
+          {
+            copy.facts.map((fact) => (
+              <li>
+                <span>{fact.label}</span>
+                <strong>{fact.value}</strong>
+              </li>
+            ))
+          }
+        </ul>
+        <ul class="profiles">
+          {
+            copy.profiles.map((item) => (
+              <li>
+                <External link={item} hint={copy.newTab} rel="me" />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">{copy.workKicker}</p>
+          <div>
+            <h2 id="work-title">{copy.workTitle}</h2>
+            <p>{copy.workIntro}</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          {
+            copy.featured.map((project) => {
+              const image = images[project.id as keyof typeof images];
+              return (
+                <article class:list={['card', { wide: project.wide }]}>
+                  <div class="media">
+                    {image ? (
+                      <Image
+                        src={image}
+                        alt={project.imageAlt ?? ''}
+                        widths={project.wide ? [640, 960, 1400] : [480, 720, 960]}
+                        sizes={project.wide ? '(min-width: 860px) 640px, 100vw' : '(min-width: 860px) 520px, 100vw'}
+                        quality={75}
+                        loading="lazy"
+                      />
+                    ) : project.figure === 'layers' ? (
+                      <figure class="figure">
+                        <ol class="stack">
+                          {copy.layers.map((layer) => (
+                            <li>
+                              <b>{layer.id}</b>
+                              <span>{layer.text}</span>
+                            </li>
+                          ))}
+                        </ol>
+                        <figcaption class="figure-note">{copy.layersNote}</figcaption>
+                      </figure>
+                    ) : (
+                      <figure class="figure">
+                        <ol class="views">
+                          {copy.views.map((view) => (
+                            <li>
+                              <b>{view.id}</b>
+                              <strong>{view.name}</strong>
+                              <span>{view.ref}</span>
+                            </li>
+                          ))}
+                        </ol>
+                        <figcaption class="figure-note">{copy.viewsNote}</figcaption>
+                      </figure>
+                    )}
+                  </div>
+                  <div class="card-body">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <p class="card-links">
+                      {project.demo && <External link={{ label: copy.demo, href: project.demo }} hint={copy.newTab} />}
+                      {project.repo && <External link={{ label: copy.source, href: project.repo }} hint={copy.newTab} />}
+                    </p>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+
+        <div class="subhead spaced">
+          <h3>{copy.moreTitle}</h3>
+          <p class="kicker">{copy.moreKicker}</p>
+        </div>
+        <ul class="more">
+          {
+            copy.more.map((item) => (
+              <li>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+                <p class="inline-links">
+                  {item.links.map((link) => (
+                    <External link={link} hint={copy.newTab} />
+                  ))}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="writing" aria-labelledby="writing-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">{copy.writingKicker}</p>
+          <div>
+            <h2 id="writing-title">{copy.writingTitle}</h2>
+          </div>
+        </div>
+        <div class="subhead">
+          <h3>{copy.seriesTitle}</h3>
+          <External link={{ label: 'dev.to', href: copy.seriesHref }} hint={copy.newTab} />
+        </div>
+        <p class="intro">{copy.seriesIntro}</p>
+        <ol class="posts">
+          {
+            copy.posts.map((post) => (
+              <li class="post">
+                <div>
+                  <External link={{ label: post.title, href: post.href }} hint={copy.newTab} />
+                  <p>{post.summary}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="essay">
+          <p class="label">{copy.essayKicker}</p>
+          <External link={{ label: copy.essay.title, href: copy.essay.href }} hint={copy.newTab} />
+          <p>{copy.essay.summary}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resume" aria-labelledby="resume-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">{copy.resumeKicker}</p>
+          <div>
+            <h2 id="resume-title">{copy.resumeTitle}</h2>
+          </div>
+        </div>
+        <ol class="timeline">
+          {
+            copy.roles.map((role) => (
+              <li>
+                <time>{role.when}</time>
+                <div>
+                  <h3>{role.title}</h3>
+                  <p>{role.detail}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="education">
+          <time>{copy.education.when}</time>
+          <div>
+            <h3>{copy.education.title}</h3>
+            <p>{copy.education.detail}</p>
+          </div>
+        </div>
+        <p class="skills">
+          <b>{copy.skillsLabel}.</b> {copy.skills}
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">{copy.contactKicker}</p>
+          <div>
+            <h2 id="contact-title">{copy.contactTitle}</h2>
+            <p>{copy.contactIntro}</p>
+          </div>
+        </div>
+        <ul class="contact-list">
+          {
+            copy.contacts.map((item) => (
+              <li>
+                {isExternal(item.href) || item.href.startsWith('mailto:') ? (
+                  <External link={item} hint={copy.newTab} rel={item.href.startsWith('http') ? 'me' : undefined} />
+                ) : (
+                  <a href={item.href}>{item.label}</a>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>{copy.footerNote}</p>
+      <p>© {year} {copy.footerRights}</p>
+    </div>
+  </footer>
+</Base>
