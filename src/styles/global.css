@@ -544,6 +544,21 @@ a:hover {
   border-bottom: 1px solid var(--line);
 }
 
+.more li.has-shot {
+  grid-template-columns: 11.5rem minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.more-shot {
+  display: block;
+  width: 11.5rem;
+  height: calc(11.5rem * 10 / 16);
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--line);
+  background: var(--media);
+}
+
 .more h3 {
   margin: 0;
   font-size: 1.05rem;
@@ -759,6 +774,12 @@ a:hover {
   .card.wide .media {
     aspect-ratio: 16 / 10;
     min-height: 0;
+  }
+
+  .more-shot {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
   .grid {
