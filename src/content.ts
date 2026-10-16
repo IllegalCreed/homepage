@@ -214,8 +214,8 @@ export const en: Copy = {
       id: 'skyfire',
       title: 'skyfire-1943',
       description:
-        'An original air-combat prototype in three views: side-scrolling, top-down, and a pseudo-3D chase. The name nods to 1943, Salamander, and Sky Destroyer. It does not use their ROMs, artwork, or music. Playable research build; gameplay screenshots are not in the public repository.',
-      figure: 'views',
+        'An original air-combat prototype in three views: side-scrolling, top-down, and a pseudo-3D chase. The name nods to 1943, Salamander, and Sky Destroyer. It does not use their ROMs, artwork, or music. Playable research build.',
+      imageAlt: 'Skyfire 1943 gameplay: side-view air combat over the sea.',
       repo: repos.skyfire,
     },
   ],
@@ -461,8 +461,8 @@ export const zh: Copy = {
       id: 'skyfire',
       title: 'skyfire-1943',
       description:
-        '原创的三视角空战原型：横版、俯视，以及伪 3D 追尾。名字致敬《1943》《沙罗曼蛇》和《Sky Destroyer》，不使用这些作品的 ROM、图像或音乐。可玩的研究版本；公开仓库里没有对局截图。',
-      figure: 'views',
+        '原创的三视角空战原型：横版、俯视，以及伪 3D 追尾。名字致敬《1943》《沙罗曼蛇》和《Sky Destroyer》，不使用这些作品的 ROM、图像或音乐。可玩的研究版本。',
+      imageAlt: 'Skyfire 1943 对局画面：海面上的横版空战。',
       repo: repos.skyfire,
     },
   ],
