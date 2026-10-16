@@ -22,8 +22,10 @@ export interface FeaturedProject {
 }
 
 export interface ListedProject {
+  id?: string;
   title: string;
   description: string;
+  imageAlt?: string;
   links: LinkItem[];
 }
 
@@ -212,8 +214,8 @@ export const en: Copy = {
       id: 'skyfire',
       title: 'skyfire-1943',
       description:
-        'An original air-combat prototype in three views: side-scrolling, top-down, and a pseudo-3D chase. The name nods to 1943, Salamander, and Sky Destroyer. It does not use their ROMs, artwork, or music. Playable research build; gameplay screenshots are not in the public repository.',
-      figure: 'views',
+        'An original air-combat prototype in three views: side-scrolling, top-down, and a pseudo-3D chase. The name nods to 1943, Salamander, and Sky Destroyer. It does not use their ROMs, artwork, or music. Playable research build.',
+      imageAlt: 'Skyfire 1943 gameplay: side-view air combat over the sea.',
       repo: repos.skyfire,
     },
   ],
@@ -234,18 +236,22 @@ export const en: Copy = {
   moreTitle: 'Smaller projects',
   more: [
     {
+      id: 'lumideck',
       title: 'LumiDeck',
       description:
         'An AI slide studio: start a deck and edit it in conversation. The public repository is named big-ppt. The live workspace asks you to sign in.',
+      imageAlt: 'Sign-in screen of LumiDeck at lumideck.illegalscreed.cn.',
       links: [
         { label: 'Live', href: demos.lumideck },
         { label: 'Repository', href: repos.lumideck },
       ],
     },
     {
+      id: 'quiz',
       title: 'IllegalCreed Quiz',
       description:
         'A Vue, NestJS, and MySQL quiz application for practicing developer questions by topic. Public repository: Quiz-monorepo.',
+      imageAlt: 'A developer question on the live IllegalCreed Quiz site.',
       links: [
         { label: 'Live', href: demos.quiz },
         { label: 'Repository', href: repos.quiz },
@@ -258,9 +264,11 @@ export const en: Copy = {
       links: [{ label: 'Repository', href: repos.guard }],
     },
     {
+      id: 'content-studio',
       title: 'content-studio',
       description:
         'A local-first toolkit for producing articles, images, and video across projects, with an agent plugin and a Vue workbench. Channel credentials stay outside this repository.',
+      imageAlt: 'Content Studio workbench showing the Algorithm Visualizer project overview.',
       links: [{ label: 'Repository', href: repos.studio }],
     },
     {
@@ -270,9 +278,11 @@ export const en: Copy = {
       links: [{ label: 'Repository', href: repos.marketing }],
     },
     {
+      id: 'roadmap',
       title: 'Programmer roadmap',
       description:
         'A maintained knowledge base, separate from this site: notes from web foundations through frontend, backend, databases, systems, security, DevOps, and architecture.',
+      imageAlt: 'Homepage of the notes site at illegalscreed.cn.',
       links: [
         { label: 'Notes', href: profiles.notes },
         { label: 'Repository', href: repos.roadmap },
@@ -451,8 +461,8 @@ export const zh: Copy = {
       id: 'skyfire',
       title: 'skyfire-1943',
       description:
-        '原创的三视角空战原型：横版、俯视，以及伪 3D 追尾。名字致敬《1943》《沙罗曼蛇》和《Sky Destroyer》，不使用这些作品的 ROM、图像或音乐。可玩的研究版本；公开仓库里没有对局截图。',
-      figure: 'views',
+        '原创的三视角空战原型：横版、俯视，以及伪 3D 追尾。名字致敬《1943》《沙罗曼蛇》和《Sky Destroyer》，不使用这些作品的 ROM、图像或音乐。可玩的研究版本。',
+      imageAlt: 'Skyfire 1943 对局画面：海面上的横版空战。',
       repo: repos.skyfire,
     },
   ],
@@ -473,16 +483,20 @@ export const zh: Copy = {
   moreTitle: '较小的项目',
   more: [
     {
+      id: 'lumideck',
       title: 'LumiDeck',
       description: '用对话生成和修改演示文稿。公开仓库的名字是 big-ppt。在线工作台需要登录。',
+      imageAlt: 'LumiDeck 在线站 lumideck.illegalscreed.cn 的登录页。',
       links: [
         { label: '在线', href: demos.lumideck },
         { label: '仓库', href: repos.lumideck },
       ],
     },
     {
+      id: 'quiz',
       title: 'IllegalCreed Quiz',
       description: '用 Vue、NestJS 和 MySQL 做的问答应用，按主题练习开发者题目。公开仓库是 Quiz-monorepo。',
+      imageAlt: 'IllegalCreed Quiz 在线站上的一道开发者题目。',
       links: [
         { label: '在线', href: demos.quiz },
         { label: '仓库', href: repos.quiz },
@@ -494,8 +508,10 @@ export const zh: Copy = {
       links: [{ label: '仓库', href: repos.guard }],
     },
     {
+      id: 'content-studio',
       title: 'content-studio',
       description: '本地优先的跨项目内容与视频生产工具，包含 agent plugin 和 Vue 工作台。渠道凭证不在这个仓库里。',
+      imageAlt: 'Content Studio 工作台里 Algorithm Visualizer 项目的概览。',
       links: [{ label: '仓库', href: repos.studio }],
     },
     {
@@ -504,8 +520,10 @@ export const zh: Copy = {
       links: [{ label: '仓库', href: repos.marketing }],
     },
     {
+      id: 'roadmap-zh',
       title: '程序员路线图',
       description: '和本站分开的知识库：从 Web 基础、前端、后端、数据库、系统、安全、DevOps 到架构的长期笔记。',
+      imageAlt: '笔记站 illegalscreed.cn 的中文首页。',
       links: [
         { label: '笔记', href: profiles.notes },
         { label: '仓库', href: repos.roadmap },
