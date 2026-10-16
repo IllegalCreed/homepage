@@ -1,0 +1,16 @@
+---
+interface Props {
+  link: { label: string; href: string };
+  hint: string;
+  rel?: string;
+}
+
+const { link, hint, rel } = Astro.props;
+const external = link.href.startsWith('http');
+const relValue = [external ? 'noopener noreferrer' : '', rel].filter(Boolean).join(' ') || undefined;
+---
+
+<a href={link.href} target={external ? '_blank' : undefined} rel={relValue}>
+  {link.label}
+  {external && <span class="sr-only"> ({hint})</span>}
+</a>

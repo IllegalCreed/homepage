@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { en } from '../content';
+---
+
+<Base copy={en} noindex canonicalPath="/">
+  <main class="missing">
+    <div class="wrap">
+      <p class="kicker">404</p>
+      <h1>Page not found</h1>
+      <p>这条页面不存在。</p>
+      <p class="profiles">
+        <a href="/">Home</a>
+        <a href="/zh/">中文</a>
+      </p>
+    </div>
+  </main>
+</Base>

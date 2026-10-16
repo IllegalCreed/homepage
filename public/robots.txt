@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://illegalscreed.com/sitemap-index.xml
